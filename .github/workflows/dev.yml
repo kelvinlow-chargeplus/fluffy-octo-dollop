@@ -6,7 +6,7 @@ on:
       - '*.*.*-dev.*'   # Matches tags with -dev suffix
       - '*.*.*-alpha.*' # Matches tags with -alpha suffix
       - '*.*.*-beta.*'  # Matches tags with -beta suffix
-      - '*.*.*-rc.*'    # Matches tags with -rc suffix
+      - '*.*.*-rc.*+*'  # Matches any version with -rc suffix
 
 jobs:
   trigger_task:
