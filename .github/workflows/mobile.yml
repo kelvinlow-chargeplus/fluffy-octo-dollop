@@ -1,0 +1,44 @@
+name: Charge+ Customer Workflow
+on:
+  push:
+    tags:
+      - "*.*.*"
+  workflow_dispatch:
+
+jobs:
+  prepare_environment:
+    name: Prepare environment
+    runs-on: ubuntu-latest
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print tag information
+        run: | 
+          TAG_NAME=${GITHUB_REF#refs/tags/}
+          echo "Tag: $TAG_NAME"
+
+  android_staging:
+    name: Android (Staging)
+    runs-on: ubuntu-latest
+    if: github.ref matches '^(refs/tags/)?\d+\.\d+\.\d+(-(?:alpha|beta|rc)\.\d+)?\+\d+$'
+    needs: prepare_environment
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print tag information
+        run: | 
+          TAG_NAME=${GITHUB_REF#refs/tags/}
+          echo "Tag: $TAG_NAME"
+
+  ios_staging:
+    name: iOS (Staging)
+    runs-on: macos-14
+    if: github.ref matches '^(refs/tags/)?\d+\.\d+\.\d+(-(?:alpha|beta|rc)\.\d+)?\+\d+$'
+    needs: prepare_environment
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print tag information
+        run: | 
+          TAG_NAME=${GITHUB_REF#refs/tags/}
+          echo "Tag: $TAG_NAME"
