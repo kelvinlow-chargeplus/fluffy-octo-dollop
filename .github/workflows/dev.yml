@@ -1,4 +1,4 @@
-name: Dev Tag Trigger Test
+# name: Dev Tag Trigger Test
 
 # on:
 #   push:
@@ -8,15 +8,15 @@ name: Dev Tag Trigger Test
 #       - '*.*.*-beta.*'  # Matches tags with -beta suffix
 #       - '*.*.*-rc.*'    # Matches tags with -rc suffix
 
-jobs:
-  trigger_task:
-    runs-on: ubuntu-latest
+# jobs:
+#   trigger_task:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
 
-      - name: Print tag information
-        run: | 
-          TAG_NAME=${GITHUB_REF#refs/tags/}
-          echo "Tag: $TAG_NAME"
+#       - name: Print tag information
+#         run: | 
+#           TAG_NAME=${GITHUB_REF#refs/tags/}
+#           echo "Tag: $TAG_NAME"
