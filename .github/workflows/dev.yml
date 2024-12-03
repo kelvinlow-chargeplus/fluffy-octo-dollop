@@ -1,0 +1,20 @@
+name: Dev Tag Trigger Test
+
+on:
+  push:
+    tags:
+      - '*.*.*-dev.*'   # Matches tags with -dev suffix
+      - '*.*.*-alpha.*' # Matches tags with -alpha suffix
+      - '*.*.*-beta.*'  # Matches tags with -beta suffix
+      - '*.*.*-rc.*'    # Matches tags with -rc suffix
+
+jobs:
+  tag-trigger-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print tag information
+        run: echo "Tag: ${{ github.ref_name }}"
