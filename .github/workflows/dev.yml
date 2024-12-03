@@ -17,4 +17,5 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Print tag information
-        run: echo "Tag: ${GITHUB_REF#refs/tags/}"
+        TAG_NAME=${GITHUB_REF#refs/tags/}
+        echo "Tag: $TAG_NAME"
