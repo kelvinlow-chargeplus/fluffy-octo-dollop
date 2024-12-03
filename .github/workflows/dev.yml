@@ -9,7 +9,7 @@ on:
       - '*.*.*-rc.*'    # Matches tags with -rc suffix
 
 jobs:
-  tag-trigger-job:
+  trigger_task:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,5 +17,6 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Print tag information
+      run: | 
         TAG_NAME=${GITHUB_REF#refs/tags/}
         echo "Tag: $TAG_NAME"
