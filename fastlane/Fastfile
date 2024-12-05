@@ -4,6 +4,7 @@ platform :ios do
   desc "Build and deploy to staging"
   lane :ios_staging do
     tag_name = ENV['TAG_NAME']
+    puts "Tag received: #{tag_name}"
     if tag_name =~ /^\d+\.\d+\.\d+(-rc\.\d+)?$/
       UI.message("Building and deploying to Staging for tag: #{tag_name}")
       # Add your iOS build commands here
