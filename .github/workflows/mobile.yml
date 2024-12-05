@@ -22,6 +22,7 @@ jobs:
     name: Android (Staging)
     runs-on: ubuntu-latest
     needs: prepare_environment
+    if: github.event_name == 'push'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -65,6 +66,7 @@ jobs:
     name: iOS (Staging)
     runs-on: macos-14
     needs: prepare_environment
+    if: github.event_name == 'push'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
