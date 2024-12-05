@@ -21,37 +21,55 @@ jobs:
   android_staging:
     name: Android (Staging)
     runs-on: ubuntu-latest
-    # if: github.ref matches '^(refs/tags/)?\d+\.\d+\.\d+(-(?:alpha|beta|rc)\.\d+)?\+\d+$'
     needs: prepare_environment
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Check tag validity
-        run: |
-          TAG_NAME=${GITHUB_REF#refs/tags/}
-          if [[ "$TAG_NAME" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-alpha\.[0-9]+|-beta\.[0-9]+|-rc\.[0-9]+)?\+[0-9]+$ ]]; then
-            echo "Valid tag: $TAG_NAME"
-          else
-            echo "Invalid tag: $TAG_NAME"
-            exit 1
-          fi
 
       - name: Print tag information
         run: | 
           TAG_NAME=${GITHUB_REF#refs/tags/}
           echo "Tag: $TAG_NAME"
 
-  # ios_staging:
-  #   name: iOS (Staging)
-  #   runs-on: macos-14
-  #   if: github.ref matches '^(refs/tags/)?\d+\.\d+\.\d+(-(?:alpha|beta|rc)\.\d+)?\+\d+$'
-  #   needs: prepare_environment
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v3
+  android_production:
+    name: Android (Production)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+    needs: prepare_environment
+    environment: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-  #     - name: Print tag information
-  #       run: | 
-  #         TAG_NAME=${GITHUB_REF#refs/tags/}
-  #         echo "Tag: $TAG_NAME"
+      - name: Print tag information
+        run: | 
+          TAG_NAME=${GITHUB_REF#refs/tags/}
+          echo "Tag: $TAG_NAME"
+
+  huawei_production:
+    name: Android (Huawei AppGallery)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+    needs: prepare_environment
+    environment: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print tag information
+        run: | 
+          TAG_NAME=${GITHUB_REF#refs/tags/}
+          echo "Tag: $TAG_NAME"
+
+  ios_staging:
+    name: iOS (Staging)
+    runs-on: macos-14
+    needs: prepare_environment
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print tag information
+        run: | 
+          TAG_NAME=${GITHUB_REF#refs/tags/}
+          echo "Tag: $TAG_NAME"
