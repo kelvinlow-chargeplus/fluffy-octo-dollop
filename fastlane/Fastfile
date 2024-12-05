@@ -10,7 +10,6 @@ platform :ios do
       # Add your iOS build commands here
     else
       UI.message("Invalid tag format for Staging: #{tag_name}")
-      exit(1) # Exit with error for invalid tag format
     end
   end
 end
