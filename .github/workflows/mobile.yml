@@ -21,7 +21,7 @@ jobs:
             echo "Tag contains 'dev'. Exiting workflow."
             exit 1
           fi
-          
+
   android_staging:
     name: Android (Staging)
     runs-on: ubuntu-latest
@@ -75,7 +75,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Print tag information
-        run: | 
-          TAG_NAME=${GITHUB_REF#refs/tags/}
-          echo "Tag: $TAG_NAME"
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0' # Specify the Ruby version required by Fastlane
+
+      - name: Install Fastlane
+        run: |
+          gem install bundler
+          bundle install
+
+      - name: Run Fastlane ios_staging
+        env:
+          TAG_NAME: ${GITHUB_REF#refs/tags/}
+        run: |
+          bundle exec fastlane ios_staging

@@ -1,0 +1,15 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Build and deploy to staging"
+  lane :ios_staging do
+    tag_name = ENV['TAG_NAME']
+    if tag_name =~ /^\d+\.\d+\.\d+(-rc\.\d+)?$/
+      UI.message("Building and deploying to Staging for tag: #{tag_name}")
+      # Add your iOS build commands here
+    else
+      UI.message("Invalid tag format for Staging: #{tag_name}")
+      exit(1) # Exit with error for invalid tag format
+    end
+  end
+end
