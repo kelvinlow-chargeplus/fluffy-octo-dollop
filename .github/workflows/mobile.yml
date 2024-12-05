@@ -13,11 +13,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Print tag information
-        run: | 
+      - name: Validate tag
+        run: |
           TAG_NAME=${GITHUB_REF#refs/tags/}
           echo "Tag: $TAG_NAME"
-
+          if [[ "$TAG_NAME" =~ dev ]]; then
+            echo "Tag contains 'dev'. Exiting workflow."
+            exit 1
+          fi
+          
   android_staging:
     name: Android (Staging)
     runs-on: ubuntu-latest
