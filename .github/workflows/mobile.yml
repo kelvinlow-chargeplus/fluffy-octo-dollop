@@ -78,7 +78,8 @@ jobs:
       - name: Set TAG_NAME environment variable
         run: |
           TAG_NAME=${GITHUB_REF#refs/tags/}
-          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_OUTPUT  # This sets TAG_NAME for use in the Fastfile
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV  # This sets TAG_NAME for use in the Fastfile
+          echo "Fastlane will use TAG_NAME=$TAG_NAME"
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
