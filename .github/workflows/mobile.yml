@@ -75,6 +75,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set TAG_NAME environment variable
+        run: |
+          TAG_NAME=${GITHUB_REF#refs/tags/}
+          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV  # This sets TAG_NAME for use in the Fastfile
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
