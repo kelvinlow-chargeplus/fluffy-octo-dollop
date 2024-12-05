@@ -93,6 +93,6 @@ jobs:
 
       - name: Run Fastlane ios_staging
         env:
-          TAG_NAME: ${GITHUB_REF#refs/tags/}
+          TAG_NAME: ${{ env.TAG_NAME }}  # Passing the TAG_NAME environment variable into Fastlane
         run: |
           bundle exec fastlane ios_staging
